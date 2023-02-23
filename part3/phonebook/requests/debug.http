@@ -1,6 +1,10 @@
 GET http://localhost:3001/api/persons
 
 ###
+
+GET http://localhost:3001/api/persons/63f7c23c4dfab64a157e9a1f
+
+###
 POST http://localhost:3001/api/persons
 Content-Type: application/json
 
@@ -14,11 +18,32 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-	"name": "Jeezus"
+
 }
 
 ###
-DELETE http://localhost:3001/api/persons/5
+DELETE http://localhost:3001/api/persons/63f7d08eb962eb14a225282a
+
+###
+PUT http://localhost:3001/api/persons/63f7c23c4dfab64a157e9a1f
+Content-Type: application/json
+
+{
+	"name": "Pierpaolo"
+}
+
+
+###
+PUT http://localhost:3001/api/persons/63f7cd3a1219f492d7b5788c
+Content-Type: application/json
+
+{
+	"number": "333"
+}
+
+###
+### Deployed application 
+###
 
 ###
 GET https://phonebook-rest-api.onrender.com/api/persons
