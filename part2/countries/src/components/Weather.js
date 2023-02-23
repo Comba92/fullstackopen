@@ -54,7 +54,7 @@ const Weather = ({ country }) => {
 	}
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(getWeather, [])
+	useEffect(getWeather, [country.capital])
 
 	return (
 		<div>
