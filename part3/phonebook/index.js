@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 
 const loggingFormat = (tokens, req, res) => {
@@ -15,6 +16,7 @@ const loggingFormat = (tokens, req, res) => {
 
 app.use(express.json(), morgan(loggingFormat))
 app.use(express.static('build'))
+app.use(cors())
 
 let persons = [
 	{ 

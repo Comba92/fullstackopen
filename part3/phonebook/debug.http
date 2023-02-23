@@ -19,3 +19,27 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3001/api/persons/5
+
+###
+GET https://phonebook-rest-api.onrender.com/api/persons
+
+###
+POST https://phonebook-rest-api.onrender.com/api/persons
+Content-Type: application/json
+
+{
+	"name": "Jeezus",
+	"number": "666"
+}
+
+###
+POST https://phonebook-rest-api.onrender.com/api/persons
+Content-Type: application/json
+
+{
+	"name": "Jeezus"
+}
+
+###
+DELETE https://phonebook-rest-api.onrender.com/api/persons/5
+
