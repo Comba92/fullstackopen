@@ -7,7 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "rm -rf build && cd ../../part2/phonebook && npm run build && cp -r build ../../part3/phonebook",
+    "build:ui": "cd frontend && npm run build",
+    "deploy:local": "npm run build:ui && npm run dev",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push origin main"
   },
   "author": "Comba92",

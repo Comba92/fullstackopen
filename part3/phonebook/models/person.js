@@ -15,13 +15,14 @@ mongoose.connect(url)
 const personSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		minLength: 5,
-		required: true
+		required: true,
+		minLength: 3
 	},
 	number: {
 		type: String,
-		minLength: 3,
-		required: true
+		required: true,
+		minLength: 8,
+		match: new RegExp('^([0-9]){2,3}-([0-9])+$')
 	}
 })
 

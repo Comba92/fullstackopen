@@ -2,7 +2,7 @@ GET http://localhost:3001/api/persons
 
 ###
 
-GET http://localhost:3001/api/persons/63f7c23c4dfab64a157e9a1f
+GET http://localhost:3001/api/persons/63f88510c88625615e0d0e90
 
 ###
 POST http://localhost:3001/api/persons
@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
 	"name": "Jeezus",
-	"number": "666"
+	"number": "333"
 }
 
 ###
@@ -18,28 +18,30 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-
+	"name": "Arara",
+	"number": "2"
 }
 
 ###
-DELETE http://localhost:3001/api/persons/63f7d08eb962eb14a225282a
+DELETE http://localhost:3001/api/persons/63f885ef0135d1f3562e8e70
 
 ###
-PUT http://localhost:3001/api/persons/63f7c23c4dfab64a157e9a1f
+PUT http://localhost:3001/api/persons/63f885ef0135d1f3562e8e71
 Content-Type: application/json
 
 {
-	"name": "Pierpaolo"
+	"number": "IVA"
 }
 
-
 ###
-PUT http://localhost:3001/api/persons/63f7cd3a1219f492d7b5788c
+PUT http://localhost:3001/api/persons/63f879a544f887a4691907e3
 Content-Type: application/json
 
 {
-	"number": "333"
+	"number": "3-12345"
 }
+
+
 
 ###
 ### Deployed application 

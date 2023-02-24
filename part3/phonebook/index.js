@@ -17,7 +17,7 @@ const loggingFormat = (tokens, req, res) => {
 	].join(' ')
 }
 
-app.use(express.static('build'))
+app.use(express.static('frontend/build'))
 app.use(express.json())
 app.use(morgan(loggingFormat))
 app.use(cors())
@@ -33,9 +33,10 @@ app.get('/info', (request, response) => {
 })
 
 app.get('/api/persons', (request, response) => {
-	Person.find().then(results => {
-		response.json(results)
-	})
+	Person.find()
+		.then(results => {
+			response.json(results)
+		})
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -73,12 +74,16 @@ app.put('/api/persons/:id', (request, response, next) => {
 		...body
 	}
 
-	Person.findOneAndUpdate(
+	Person.findByIdAndUpdate(
 		id, newPerson, 
 		{ new: true, runValidators: true, context: 'query' }
 	)
 		.then(result => {
-			response.json(result)
+			if(result) {
+				response.json(result)
+			} else {
+				response.status(404).end()
+			}
 		})
 		.catch(error => next(error))
 })
@@ -93,21 +98,10 @@ app.post('/api/persons', (request, response, next) => {
 		})
 	}
 
-	Person.find({name: body.name})
-		.then(result => {
-			console.log(result)
-			return response.status(400).json({
-				error: 'name must be unique'
-			})
-		})
-
-	const newPerson = new Person({
-		...body
-	})
+	const newPerson = Person({ ...body })
 
 	newPerson.save()
 		.then(result => {
-			console.log(`${body.name} saved.`)
 			response.json(newPerson)
 		})
 		.catch(error => next(error))
