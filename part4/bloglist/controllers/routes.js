@@ -1,22 +1,18 @@
 const router = require('express').Router()
 const Blog = require('../schemas/blog')
 
-router.get('/blogs', (request, response) => {
-  Blog
-    .find({})
-    .then(blogs => {
-      response.json(blogs)
-    })
+router.get('/blogs', async (request, response) => {
+  const results = await Blog.find({})
+  response.json(results)
 })
 
-router.post('/blogs', (request, response) => {
-  const blog = new Blog(request.body)
+router.post('/blogs', async (request, response) => {
+  if (!request.body.likes)
+    request.body.likes = 0
 
-  blog
-    .save()
-    .then(result => {
-      response.status(201).json(result)
-    })
+  const blog = new Blog(request.body)
+  const result = await blog.save()
+  response.status(201).json(result)
 })
 
 module.exports = router
