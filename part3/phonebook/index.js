@@ -17,10 +17,11 @@ const loggingFormat = (tokens, req, res) => {
   ].join(' ')
 }
 
+app.use(cors())
 app.use(express.static('frontend/build'))
 app.use(express.json())
 app.use(morgan(loggingFormat))
-app.use(cors())
+
 
 
 app.get('/info', (request, response) => {

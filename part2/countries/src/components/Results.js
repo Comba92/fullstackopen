@@ -1,5 +1,5 @@
 const Results = ({ results, viewCountry }) => {
-	const getResultsToShow = () => {
+  const getResultsToShow = () => {
     // This runs everytime we update the search box!
 
     if(results.length === 0) return <div>No results.</div>
@@ -14,12 +14,12 @@ const Results = ({ results, viewCountry }) => {
       return <div>Too many matches, specify another filter</div>
     }
   }
-	
-	return (
-		<div>
+  
+  return (
+    <div>
         {getResultsToShow()}
     </div>
-	)
+  )
 }
 
 export default Results
