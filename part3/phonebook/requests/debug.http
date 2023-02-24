@@ -9,8 +9,8 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-	"name": "Jeezus",
-	"number": "333"
+  "name": "Jeezus",
+  "number": "333"
 }
 
 ###
@@ -18,8 +18,8 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-	"name": "Arara",
-	"number": "2"
+  "name": "Arara",
+  "number": "2"
 }
 
 ###
@@ -30,7 +30,7 @@ PUT http://localhost:3001/api/persons/63f885ef0135d1f3562e8e71
 Content-Type: application/json
 
 {
-	"number": "IVA"
+  "number": "IVA"
 }
 
 ###
@@ -38,7 +38,7 @@ PUT http://localhost:3001/api/persons/63f879a544f887a4691907e3
 Content-Type: application/json
 
 {
-	"number": "3-12345"
+  "number": "3-12345"
 }
 
 
@@ -55,8 +55,8 @@ POST https://phonebook-rest-api.onrender.com/api/persons
 Content-Type: application/json
 
 {
-	"name": "Jeezus",
-	"number": "666"
+  "name": "Jeezus",
+  "number": "666"
 }
 
 ###
@@ -64,7 +64,7 @@ POST https://phonebook-rest-api.onrender.com/api/persons
 Content-Type: application/json
 
 {
-	"name": "Jeezus"
+  "name": "Jeezus"
 }
 
 ###
