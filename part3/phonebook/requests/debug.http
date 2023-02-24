@@ -18,19 +18,19 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-  "name": "Arara",
-  "number": "2"
+  "name": "prova1",
+  "number": "123-4567890"
 }
 
 ###
-DELETE http://localhost:3001/api/persons/63f885ef0135d1f3562e8e70
+DELETE http://localhost:3001/api/persons/63f89698b66bfd57ad7eb9ac
 
 ###
-PUT http://localhost:3001/api/persons/63f885ef0135d1f3562e8e71
+PUT http://localhost:3001/api/persons/63f89231273d14875be238a0
 Content-Type: application/json
 
 {
-  "number": "IVA"
+  "name": "IVA"
 }
 
 ###
@@ -55,7 +55,7 @@ POST https://phonebook-rest-api.onrender.com/api/persons
 Content-Type: application/json
 
 {
-  "name": "Jeezus",
+  "name": "ehehehe",
   "number": "666"
 }
 
