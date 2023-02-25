@@ -1,0 +1,47 @@
+GET http://localhost:3000/api/users
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "username": "hellas",
+  "password": "prova2"
+}
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "username": "giulius",
+  "password": "prova2"
+}
+
+###
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "username": "hellas",
+  "password": "prova2"
+}
+
+
+###
+POST http://localhost:3000/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNjNmYTRhYjE5ODcyYjZhMTFiY2JmNzBmIiwiaWF0IjoxNjc3MzUwMzMwfQ.rXiU9aEUx1p91JsZqapQoxjSLj5IkV0X259BKmjQk68
+
+{
+  "title": "now post is very cool",
+  "url": "none"
+}
+
+
+###
+DELETE http://localhost:3000/api/blogs/63fa4b29b256e35e3c8a0cee
+Authorization: Bearer ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNjNmYTRhYjE5ODcyYjZhMTFiY2JmNzBmIiwiaWF0IjoxNjc3MzUwNDQ0fQ.PLwtFWX6wPlGSS0fnoqP0k2GEsYLsFE1HXL8De3J5H8
+
+###
+DELETE http://localhost:3000/api/blogs/63fa4ade929cbf5eb22d95fc
