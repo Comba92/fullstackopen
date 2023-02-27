@@ -4,7 +4,6 @@ const app = require('../app')
 const Blog = require('../models/blog')
 
 const { initialBlogs, getBlogsAsJson, generateFakeId } = require('../utils/blogs_helper')
-const users = require('../utils/users_helper')
 const User = require('../models/user')
 
 // Used to make HTTP requests
@@ -142,6 +141,19 @@ describe('HTTP PUT', () => {
 })
 
 describe('POPULATE tests', () => {
+  const users =  [
+    {
+      username: 'mluukkai',
+      name: 'Matti',
+      password: 'prova1'
+    },
+    {
+      username: 'hellas',
+      name: 'Arto',
+      password: 'prova2'
+    },
+  ]
+
   beforeEach( async () => {
     await User.deleteMany({})
     await User.insertMany(users)

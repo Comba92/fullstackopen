@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Blog = require('../models/blog')
+const middleware = require('../utils/middleware')
 
 
 router.get('/', async (request, response) => {
@@ -10,12 +11,10 @@ router.get('/', async (request, response) => {
 })
 
 
-router.post('/', async (request, response, next) => {
+router.post('/', middleware.userExtractor, async (request, response, next) => {
   if (!request.body.title || !request.body.url) {
     return response.status(400).end()
   }
-  if (!request.body.likes)
-    request.body.likes = 0
 
   try {
     const blog = new Blog({
@@ -26,12 +25,17 @@ router.post('/', async (request, response, next) => {
     const savedBlog = await blog.save()
     request.user.blogs = request.user.blogs.concat( savedBlog._id )
     await request.user.save()
-    response.status(201).json(savedBlog)
+
+    const result = await Blog
+      .findById(savedBlog.id.toString())
+      .populate('user', { username: 1, name: 1 })
+
+    response.status(201).json(result)
 
   } catch(error) { next(error) }
 })
 
-router.delete('/:id', async (request, response, next) => {
+router.delete('/:id', middleware.userExtractor, async (request, response, next) => {
   try {
     const blog = await Blog.findById(request.params.id)
     if(!blog) {
@@ -50,22 +54,20 @@ router.delete('/:id', async (request, response, next) => {
   } catch(error) { next(error) }
 })
 
-router.put('/:id', async (request, response) => {
-  const updatedBlog = {
-    ...request.body
-  }
+router.put('/:id', async (request, response, next) => {
+  try {
+    const result = await Blog.findByIdAndUpdate(
+      request.params.id,
+      request.body,
+      { new: true }
+    ).populate('user', { username: 1, name: 1 })
 
-  const result = await Blog.findByIdAndUpdate(
-    request.params.id,
-    updatedBlog,
-    { new: true }
-  )
+    if(!result) {
+      return response.status(404).end()
+    }
 
-  if(!result) {
-    return response.status(404).end()
-  }
-
-  response.json(result)
+    return response.json(result)
+  } catch(error) { next(error) }
 })
 
 module.exports = router
