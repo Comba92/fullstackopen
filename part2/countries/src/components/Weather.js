@@ -7,10 +7,7 @@ const Weather = ({ country }) => {
   const [weather, setWeather] = useState({})
 
   const getGeocode = async () => {
-    const requestUrl = `https://api.openweathermap.org/geo/1.0/\
-      direct?q=${country.capital}\
-      &limit=1\
-      &appid=${weatherApiKey}`
+    const requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${country.capital}&limit=1&appid=${weatherApiKey}`
 
     return axios.get(requestUrl).then(response => {
       const geocode = {
@@ -23,14 +20,10 @@ const Weather = ({ country }) => {
   }
 
   const getWeatherData = async (geocode) => {
-    const requestUrl = `https://api.openweathermap.org/data/2.5/\
-      weather?lat=${geocode.lat}&lon=${geocode.lon}\
-      &units=metric\
-      &appid=${weatherApiKey}`
+    const requestUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${geocode.lat}&lon=${geocode.lon}&units=metric&appid=${weatherApiKey}`
 
     return axios.get(requestUrl).then(response => {
-      const iconUrl = `https://openweathermap.org/img/wn/\
-        ${response.data.weather[0].icon}@2x.png`
+      const iconUrl = `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
       
       const weatherObject = {
         temp: response.data.main.temp,
