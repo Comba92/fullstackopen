@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import BlogsList from './components/BlogsList'
@@ -84,7 +85,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       {notification !== null && (
         <Notification message={notification} />
       )}
