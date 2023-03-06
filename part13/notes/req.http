@@ -1,0 +1,43 @@
+POST http://localhost:3001/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdpdWxpbyIsImlkIjoxLCJpYXQiOjE2NzgxMzQ3MzJ9.J67dGETlJLFm8VIge_QLkwRu5tRgsps1wXkvsYZfeu0
+
+{
+  "content": "A new note to add to postgres!",
+  "important": false
+}
+
+###
+DELETE http://localhost:3001/notes/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdpdWxpbyIsImlkIjoxLCJpYXQiOjE2NzgxMzQ3MzJ9.J67dGETlJLFm8VIge_QLkwRu5tRgsps1wXkvsYZfeu0
+
+###
+PUT http://localhost:3001/notes/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdpdWxpbyIsImlkIjoxLCJpYXQiOjE2NzgxMzQ3MzJ9.J67dGETlJLFm8VIge_QLkwRu5tRgsps1wXkvsYZfeu0
+
+{
+  "content": "non mi piace piu la cambio"
+}
+
+###
+DELETE http://localhost:3001/notes/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmNvIiwiaWQiOjIsImlhdCI6MTY3ODEzNTczNH0.ZT7YUjMOM4uwALeyeEEsDgAHgKjM3LBvGnDua324mO4
+
+###
+POST http://localhost:3001/users
+Content-Type: application/json
+
+{
+  "username": "giulio",
+  "name": "GIULIO IS DEAD"
+}
+
+###
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+  "username": "marco",
+  "password": "secret"
+}
