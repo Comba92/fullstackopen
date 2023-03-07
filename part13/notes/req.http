@@ -1,6 +1,6 @@
 POST http://localhost:3001/notes
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdpdWxpbyIsImlkIjoxLCJpYXQiOjE2NzgxMzQ3MzJ9.J67dGETlJLFm8VIge_QLkwRu5tRgsps1wXkvsYZfeu0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYSIsImlkIjoxLCJpYXQiOjE2NzgxOTQ2MzV9.h_ERiAH-2E4wgN74_Svpzzm13I75TtEL6ClU5S9RRbw
 
 {
   "content": "A new note to add to postgres!",
@@ -8,13 +8,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdpd
 }
 
 ###
+POST http://localhost:3001/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYSIsImlkIjoxLCJpYXQiOjE2NzgxOTQ2MzV9.h_ERiAH-2E4wgN74_Svpzzm13I75TtEL6ClU5S9RRbw
+
+{
+  "content": "Una nota bella lunga!!",
+  "important": false
+}
+
+###
 DELETE http://localhost:3001/notes/5
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdpdWxpbyIsImlkIjoxLCJpYXQiOjE2NzgxMzQ3MzJ9.J67dGETlJLFm8VIge_QLkwRu5tRgsps1wXkvsYZfeu0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmNvIiwiaWQiOjIsImlhdCI6MTY3ODE4NTE2N30.3cgflI5PYxx7SlRPGCd9n1XAwPlhOTMGjX3BQLyqCCc
 
 ###
 PUT http://localhost:3001/notes/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdpdWxpbyIsImlkIjoxLCJpYXQiOjE2NzgxMzQ3MzJ9.J67dGETlJLFm8VIge_QLkwRu5tRgsps1wXkvsYZfeu0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmNvIiwiaWQiOjIsImlhdCI6MTY3ODE4NTE2N30.3cgflI5PYxx7SlRPGCd9n1XAwPlhOTMGjX3BQLyqCCc
 
 {
   "content": "non mi piace piu la cambio"
@@ -22,15 +32,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdpd
 
 ###
 DELETE http://localhost:3001/notes/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmNvIiwiaWQiOjIsImlhdCI6MTY3ODEzNTczNH0.ZT7YUjMOM4uwALeyeEEsDgAHgKjM3LBvGnDua324mO4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmNvIiwiaWQiOjIsImlhdCI6MTY3ODE4NTE2N30.3cgflI5PYxx7SlRPGCd9n1XAwPlhOTMGjX3BQLyqCCc
 
 ###
 POST http://localhost:3001/users
 Content-Type: application/json
 
 {
-  "username": "giulio",
-  "name": "GIULIO IS DEAD"
+  "username": "marco"
+}
+
+###
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+  "username": "andrea",
+  "password": "secret"
 }
 
 ###
@@ -41,3 +59,20 @@ Content-Type: application/json
   "username": "marco",
   "password": "secret"
 }
+
+###
+POST http://localhost:3001/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYSIsImlkIjoxLCJpYXQiOjE2NzgxOTQ2MzV9.h_ERiAH-2E4wgN74_Svpzzm13I75TtEL6ClU5S9RRbw
+
+{
+  "content": "An IMPORTANT note added!",
+  "important": true
+}
+
+
+###
+GET http://localhost:3001/notes?important=false
+
+###
+GET http://localhost:3001/notes?search=a
