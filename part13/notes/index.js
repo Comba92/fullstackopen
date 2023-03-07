@@ -60,6 +60,7 @@ User.init({
   name:  DataTypes.STRING,
   admin: { type: DataTypes.BOOLEAN, defaultValue: false }, 
   disabled: { type: DataTypes.BOOLEAN, defaultValue: false },
+  session: { type: DataTypes.STRING }
 }, {
   sequelize,
   underscored: true,
@@ -118,11 +119,25 @@ Group.belongsToMany(Note, { through: GroupNote })
 Note.belongsToMany(Group, { through: GroupNote })
 
 
-const tokenExtractor = (req, res, next) => {
+const tokenExtractor = async (req, res, next) => {
   const auth = req.get('authorization')
   if (auth && auth.toLowerCase().startsWith('bearer ')) {
     try {
-      req.decodedToken = jwt.verify(auth.split(' ')[1], process.env.SECRET)
+      const encodedToken = auth.split(' ')[1]
+
+      const user = await User.findOne({
+        where: {
+          'session': encodedToken
+        }
+      })
+
+      if(!user) {
+        return res.status(401).json({ error: 'token invalid' })
+      }
+
+      const decodedToken = jwt.verify(encodedToken, process.env.SECRET)
+      req.user = await User.findByPk(decodedToken.id)
+
     } catch {
       return res.status(401).json({ error: 'token invalid' })
     }
@@ -135,10 +150,8 @@ const tokenExtractor = (req, res, next) => {
 
 
 const isAdmin = async (req, res, next) => {
-  const user = await User.findByPk(req.decodedToken.id)
-
-  if (!user.admin) {
-    return res.status(401).json({ error: 'operation not allowed ' })
+  if (!req.user.admin) {
+    return res.status(401).json({ error: 'operation not allowed' })
   }
 
   next()
@@ -174,10 +187,25 @@ app.post('/login', async (request, response) => {
   }
 
   const token = jwt.sign(userForToken, process.env.SECRET)
+  user.session = token
+  await user.save()
 
   response
     .status(200)
     .send({ token, username: user.username, name: user.name })
+})
+
+app.delete('/logout', tokenExtractor, async (req, res) => {
+  if(!req.user) {
+    return response.status(401).json({
+      error: 'something went wrong.'
+    })
+  }
+
+  req.user.session = null
+  await req.user.save()
+
+  res.status(204).end()
 })
 
 app.get('/users', async (req, res) => {
@@ -217,6 +245,10 @@ app.put('/users/:username', tokenExtractor, isAdmin, async (req, res) => {
   })
 
   if (user) {
+    if(req.body.disabled) {
+      req.body.session = null
+    }
+
     user.set(req.body)
     await user.save()
     res.json(user)
@@ -301,14 +333,13 @@ app.get('/notes/:id', async (req, res) => {
 
 app.delete('/notes/:id', tokenExtractor, async (req, res) => {
   try {
-    const user = await User.findByPk(req.decodedToken.id)
     const note = await Note.findOne({
       where: {
-        userId: user.id
+        userId: req.user.id
       }
     })
     
-    if (note) {
+    if (note && note.userId === req.user.id) {
       note.destroy()
       res.status(204).end()
     } else {
@@ -321,9 +352,8 @@ app.delete('/notes/:id', tokenExtractor, async (req, res) => {
 
 app.post('/notes', tokenExtractor, async (req, res) => {
   try {
-    const user = await User.findByPk(req.decodedToken.id)
     const note = await Note.create({
-      ...req.body, userId: user.id, date: new Date()
+      ...req.body, userId: req.user.id, date: new Date()
     })
     res.json(note)
   } catch(error) {
@@ -333,10 +363,9 @@ app.post('/notes', tokenExtractor, async (req, res) => {
 
 app.put('/notes/:id', tokenExtractor, async (req, res) => {
   try {
-    const user = await User.findByPk(req.decodedToken.id)
     const note = await Note.findByPk(req.params.id)
 
-    if (note) {
+    if (note && note.userId === req.user.id) {
       await note.update(req.body)
       res.json(note)
     } else {

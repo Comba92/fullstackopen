@@ -39,16 +39,7 @@ POST http://localhost:3001/users
 Content-Type: application/json
 
 {
-  "username": "marco"
-}
-
-###
-POST http://localhost:3001/login
-Content-Type: application/json
-
-{
-  "username": "andrea",
-  "password": "secret"
+  "username": "giulio"
 }
 
 ###
@@ -61,9 +52,23 @@ Content-Type: application/json
 }
 
 ###
+DELETE http://localhost:3001/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmNvIiwiaWQiOjEsImlhdCI6MTY3ODIxODEwOX0.DWWW_DZnFfQdD_jEwDG1Y7sKcgDuGnaJKx6WMxU2vqM
+
+###
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+  "username": "giulio",
+  "password": "secret"
+}
+
+###
 POST http://localhost:3001/notes
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYSIsImlkIjoxLCJpYXQiOjE2NzgxOTQ2MzV9.h_ERiAH-2E4wgN74_Svpzzm13I75TtEL6ClU5S9RRbw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmNvIiwiaWQiOjEsImlhdCI6MTY3ODIxODEwOX0.DWWW_DZnFfQdD_jEwDG1Y7sKcgDuGnaJKx6WMxU2vqM
 
 {
   "content": "An IMPORTANT note added!",
@@ -76,3 +81,13 @@ GET http://localhost:3001/notes?important=false
 
 ###
 GET http://localhost:3001/notes?search=a
+
+
+###
+PUT http://localhost:3001/users/marco
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdpdWxpbyIsImlkIjoyLCJpYXQiOjE2NzgyMTgzNjh9.5741s3VG3UrxPspjjoMGPi-POdvynq_2XJ3nPDYnC3k
+
+{
+  "name": "frocio"
+}
